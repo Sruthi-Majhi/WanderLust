@@ -1,4 +1,4 @@
-# WanderLust🏡
+WanderLust🏡
 WanderLust is an app designed to facilitate the viewing, uploading, and booking of listings.
 
 Features
