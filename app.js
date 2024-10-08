@@ -66,6 +66,7 @@ app.get("/listings/:id/edit", wrapAsync( async (req, res) => {
   let { id } = req.params;
   const detail = await listing.findById(id);
   res.render("listing/edit.ejs", { listing: detail });
+
 }));
 
 app.get("/listings/new", (req, res) => {
@@ -81,11 +82,8 @@ app.get("/listings/:id", wrapAsync( async (req, res) => {
 app.post(
   "/listings",
   wrapAsync(async (req, res, next) => {
-    if(!req.body.detail)
-    {
-      throw new ExpressError(404, "Send valid data for listing");
-    }
-    const listed = new listing(req.body.detail);
+
+    const listed = new listing(req.body);
     await listed.save();
     res.redirect("/listings");
   })
@@ -95,13 +93,18 @@ app.post(
 
 app.put("/listings/:id", wrapAsync(async (req, res) => {
   let { id } = req.params;
-  if(!req.body.detail)
-    {
-      throw new ExpressError(404, "Send valid data for listing");
-    }
-  await listing.findByIdAndUpdate(id, { ...req.body.detail });
+  await listing.findByIdAndUpdate(id, { ...req.body});
   res.redirect(`/listings/${id}`);
 }));
+
+// app.put("/listings/:id", wrapAsync(async (req, res) => {
+//   let { id } = req.params;
+//  let updatedListing =  listing.findByIdAndUpdate(id, { ...req.body});
+// console.log(id);
+// console.log(updatedListing);
+// await  updatedListing.save();
+//   res.redirect(`/listings/${id}`);
+// }));
 
 app.delete("/listings/:id", wrapAsync(async (req, res) => {
   let { id } = req.params;
