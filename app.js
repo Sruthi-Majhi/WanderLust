@@ -7,6 +7,7 @@ const engine = require("ejs-mate");
 const listing = require("./models/listing.js");
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
+const {listingSchema} = require("./schema.js");
 
 let mongoUrl = "mongodb://127.0.0.1:27017/wanderlust";
 
@@ -40,23 +41,6 @@ app.get("/", (req, res) => {
   res.send("server working  fine");
 });
 
-// app.get("/testlisting", async (req, res)=>
-// {
-//     let sampleListing= new listing({
-//         title:"My new Villa",
-//         description:"By the watch",
-//         price:3000,
-//         location:"Calungute, Goa",
-//         country:"India"
-
-//     });
-
-//     await sampleListing.save();
-//     console.log("Sample saved");
-//         res.send("Successful");
-
-// });
-
 app.get("/listings", wrapAsync(async (req, res) => {
   const listings = await listing.find();
   res.render("listing/index", { listings });
@@ -79,10 +63,20 @@ app.get("/listings/:id", wrapAsync( async (req, res) => {
   res.render("listing/show.ejs", { listing: detail });
 }));
 
+const validateListing = (req, res, next) => {
+  let { error } = listingSchema.validate(req.body);
+
+  if (error) {
+      throw new ExpressError(400, error);
+  } else {
+      next();
+  }
+};
+
 app.post(
   "/listings",
+  validateListing,
   wrapAsync(async (req, res, next) => {
-
     const listed = new listing(req.body);
     await listed.save();
     res.redirect("/listings");
@@ -91,20 +85,14 @@ app.post(
 
 
 
-app.put("/listings/:id", wrapAsync(async (req, res) => {
+app.put("/listings/:id", 
+  validateListing, 
+  wrapAsync(async (req, res) => {
   let { id } = req.params;
   await listing.findByIdAndUpdate(id, { ...req.body});
   res.redirect(`/listings/${id}`);
 }));
 
-// app.put("/listings/:id", wrapAsync(async (req, res) => {
-//   let { id } = req.params;
-//  let updatedListing =  listing.findByIdAndUpdate(id, { ...req.body});
-// console.log(id);
-// console.log(updatedListing);
-// await  updatedListing.save();
-//   res.redirect(`/listings/${id}`);
-// }));
 
 app.delete("/listings/:id", wrapAsync(async (req, res) => {
   let { id } = req.params;
