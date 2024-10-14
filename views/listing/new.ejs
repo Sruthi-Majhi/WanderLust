@@ -6,10 +6,10 @@
       <div class="col-8 offset-2">
         <h3>Create New Listing</h3>
         <div class="mb-3">
-          <label for="title" class="form-label">Title</label>
+          <label for="listing" class="form-label">Title</label>
           <input
             type="text"
-            name="title"
+            name="listing[title]"
             placeholder="Enter title"
             class="form-control"
             required
@@ -20,7 +20,7 @@
         <div class="mb-3">
           <label for="description" class="form-label">Description</label>
           <textarea
-            name="description"
+            name="listing[description]"
             rows="5"
             cols="35"
             class="form-control"
@@ -33,7 +33,7 @@
           <label for="image" class="form-label">Image </label>
           <input
             type="text"
-            name="image"
+            name="listing[image]"
             placeholder="Enter image URL/link"
             class="form-control"
           />
@@ -43,7 +43,7 @@
             <label for="price" class="form-label">Price</label>
             <input
               
-              name="price"
+              name="listing[price]"
               placeholder="Enter price"
               class="form-control"
               required
@@ -54,7 +54,7 @@
             <label for="country" class="form-label">Country</label>
             <input
               type="text"
-              name="country"
+              name="listing[country]"
               placeholder="Enter country"
               class="form-control"
               required
@@ -66,7 +66,7 @@
           <label for="location" class="form-label">Location</label>
           <input
             type="text"
-            name="location"
+            name="listing[location]"
             placeholder="Enter location"
             class="form-control"
             required

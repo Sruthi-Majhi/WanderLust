@@ -8,6 +8,8 @@ const listing = require("./models/listing.js");
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
 const {listingSchema} = require("./schema.js");
+const Review = require("./models/reviews.js");
+
 
 let mongoUrl = "mongodb://127.0.0.1:27017/wanderlust";
 
@@ -49,7 +51,7 @@ app.get("/listings", wrapAsync(async (req, res) => {
 app.get("/listings/:id/edit", wrapAsync( async (req, res) => {
   let { id } = req.params;
   const detail = await listing.findById(id);
-  res.render("listing/edit.ejs", { listing: detail });
+  res.render("listing/edit.ejs", { listing:detail });
 
 }));
 
@@ -73,11 +75,29 @@ const validateListing = (req, res, next) => {
   }
 };
 
+//reviews
+app.post("/listings/:id/reviews", async(req, res) =>
+{
+  let listings = await listing.findById(req.params.id);
+  console.log(req.body);
+  let newReview = new Review(req.body.review);
+
+  listings.reviews.push(newReview);
+
+
+  await newReview.save();
+  await listings.save();
+
+  res.send("new review saved");
+
+
+});
+
 app.post(
   "/listings",
   validateListing,
   wrapAsync(async (req, res, next) => {
-    const listed = new listing(req.body);
+    const listed = new listing(req.body.listing);
     await listed.save();
     res.redirect("/listings");
   })
@@ -89,7 +109,7 @@ app.put("/listings/:id",
   validateListing, 
   wrapAsync(async (req, res) => {
   let { id } = req.params;
-  await listing.findByIdAndUpdate(id, { ...req.body});
+  await listing.findByIdAndUpdate(id, { ...req.body.listing});
   res.redirect(`/listings/${id}`);
 }));
 
