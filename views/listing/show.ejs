@@ -25,7 +25,6 @@
     </div>
   </div>
   <%if(currUser && currUser._id.equals(listing.owner._id)){%>
-  <div class="btns">
   <div class="col-1 offset-3 mb-3">
     <a href="/listings/<%=listing._id%>/edit" class="btn btn-danger">Edit</a>
   </div>
@@ -34,10 +33,9 @@
       <button class="btn btn-dark">Delete</button>
     </form>
   </div>
-</div>
 <%}%>
   <hr />
-
+<%if(currUser){%>
   <div class="col-8 offset-3">
     <h4>Leave a review</h4>
     <form
@@ -73,8 +71,10 @@
 
       <button class="btn btn-outline-dark">Submit</button>
     </form>
+   
 
     <hr />
+    <%}%>
 
     <h4>All reviews</h4>
 
@@ -83,10 +83,14 @@
 
       <div class="card col-5 mb-2 ms-2">
         <div class="card-body">
-          <h5 class="card-title">John Doe</h5>
+          <h5 class="card-title">@<%=review.author.username%></h5>
           <p class="card-text"><%=review.comment%></p>
           <p class="card-text"><%=review.rating%></p>
+          
         </div>
+        <form  action="/listings/<%=listing._id%>/reviews/<%=review._id%>?_method = DELETE" method="POST">
+          <button class="btn btn-sm btn-dark mb-3">Delete</button>
+        </form>
       </div>
 
       <%}%>

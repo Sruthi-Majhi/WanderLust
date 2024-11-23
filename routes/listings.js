@@ -4,7 +4,9 @@ const wrapAsync = require("../utils/wrapAsync.js");
 const ExpressError = require("../utils/ExpressError.js");
 const { listingSchema, reviewSchema } = require("../schema.js");
 const listing = require("../models/listing.js");
-const {isLoggedIn} = require("../middleware.js");
+const Review = require("../models/reviews.js");
+const {isLoggedIn, isOwner} = require("../middleware.js");
+const path = require("path");
 
 
 router.get(
@@ -18,6 +20,7 @@ router.get(
 router.get(
   "/:id/edit",
   isLoggedIn,
+  isOwner,
   wrapAsync(async (req, res) => {
     let { id } = req.params;
     const detail = await listing.findById(id);
@@ -38,7 +41,7 @@ router.get(
   "/:id",
   wrapAsync(async (req, res) => {
     let { id } = req.params;
-    const detail = await listing.findById(id).populate("reviews").populate("owner");
+    const detail = await listing.findById(id).populate({path : "reviews", populate:{path: "author"},}).populate("owner");
     if(!detail)
       {
         req.flash("error", "The listing does not exist!");
@@ -75,6 +78,7 @@ router.post(
 router.put(
   "/:id",
   isLoggedIn,
+  isOwner,
   validateListing,
   wrapAsync(async (req, res) => {
     let { id } = req.params;
@@ -87,6 +91,7 @@ router.put(
 router.delete(
   "/:id",
   isLoggedIn,
+  isOwner,
   wrapAsync(async (req, res) => {
     let { id } = req.params;
     await listing.findByIdAndDelete(id);
@@ -95,5 +100,7 @@ router.delete(
     res.redirect("/listings");
   })
 );
+
+
 
 module.exports = router;
