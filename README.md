@@ -1,62 +1,73 @@
-#Wanderlust
+WANDERLUST
 
-Wanderlust is a travel accommodation platform that allows users to explore, create, and manage property listings. Built with a robust tech stack, it offers a seamless experience for travelers and hosts, including features like image uploads, reviews, and user authentication.
+WANDERLUST is a TRAVEL ACCOMMODATION PLATFORM that allows users to explore, create, and manage property listings. With features like image uploads, reviews, and user authentication, it provides a seamless experience for both travelers and hosts.
 
----
-
-Features
-
-Property Management: Create, edit, and delete property listings.
-
-Image Upload: Upload property images directly from your device and store them on the cloud using Multer and Cloudinary.
-
-User Reviews: Add, view, edit, and delete reviews for listed properties.
-
-Authentication & Authorization: User login, signup, and role-based access using Passport.js.
-
-Flash Messages: Get success and error notifications during operations like creating or editing properties.
-
-Validation: Front-end validation using JavaScript and back-end schema validation using Joi.
-
-Dynamic Routing: Modular and compact routes using Express Router.
 
 ---
 
-Tech Stack
+FEATURES
 
-Frontend
+PROPERTY MANAGEMENT: Create, edit, and delete property listings.
+
+IMAGE UPLOAD: Upload images directly from your device using MULTER and store them securely with CLOUDINARY.
+
+USER REVIEWS: Add, view, edit, and delete reviews for properties.
+
+AUTHENTICATION & AUTHORIZATION: Secure login, signup, and role-based access using PASSPORT.JS.
+
+FLASH MESSAGES: Success and error notifications for actions like creating or editing properties using CONNECT-FLASH.
+
+VALIDATION:
+
+Client-Side: Validates user inputs dynamically.
+
+Server-Side: Schema validation using JOI.
+
+
+DYNAMIC ROUTING: Compact and modular routes implemented with EXPRESS ROUTER.
+
+
+
+---
+
+TECH STACK
+
+FRONTEND
 
 HTML
 
 CSS
 
-JavaScript
+JAVASCRIPT
 
-Bootstrap
-
-
-Backend
-
-Node.js
-
-Express.js
+BOOTSTRAP
 
 
-Database
+BACKEND
 
-MongoDB
+NODE.JS
+
+EXPRESS.JS
 
 
-Other Tools
+DATABASE
 
-Multer for image uploads
+MONGODB
 
-Cloudinary for cloud image storage
 
-Passport.js for authentication
+TOOLS USED
 
-Joi for validation
+MULTER: For handling image uploads.
+
+CLOUDINARY: For storing images in the cloud.
+
+PASSPORT.JS: For authentication.
+
+JOI: For backend validation.
+
+CONNECT-FLASH: For flash messages.
 
 
 
 ---
+
