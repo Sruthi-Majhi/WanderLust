@@ -1,11 +1,11 @@
-WANDERLUST
+# WANDERLUST
 
 WANDERLUST is a TRAVEL ACCOMMODATION PLATFORM that allows users to explore, create, and manage property listings. With features like image uploads, reviews, and user authentication, it provides a seamless experience for both travelers and hosts.
 
 
 ---
 
-FEATURES
+# FEATURES
 
 PROPERTY MANAGEMENT: Create, edit, and delete property listings.
 
@@ -30,7 +30,7 @@ DYNAMIC ROUTING: Compact and modular routes implemented with EXPRESS ROUTER.
 
 ---
 
-TECH STACK
+# TECH STACK
 
 FRONTEND
 
@@ -55,7 +55,7 @@ DATABASE
 MONGODB
 
 
-TOOLS USED
+# TOOLS USED
 
 MULTER: For handling image uploads.
 
