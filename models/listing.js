@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const Review = require("./reviews.js");
+const { url } = require("inspector");
 
 const Schema = mongoose.Schema;
 
@@ -9,13 +11,15 @@ const listingSchema = new Schema({
   },
   description: String,
   image: {
-    type: String,
-    default:
-      "https://images.unsplash.com/photo-1651557452559-04db8ace569d?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    set: (v) =>
-      v === ""
-        ? "https://images.unsplash.com/photo-1651557452559-04db8ace569d?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        : v,
+    // type: String,
+    // default:
+    //   "https://images.unsplash.com/photo-1651557452559-04db8ace569d?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    // set: (v) =>
+    //   v === ""
+    //     ? "https://images.unsplash.com/photo-1651557452559-04db8ace569d?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    //     : v,
+    url:String,
+    filename:String
   },
   price: Number,
   location: String,
@@ -33,6 +37,12 @@ const listingSchema = new Schema({
     }
   
 });
+
+listingSchema.post("findOneAndDelete", async(listing) => {
+  if(listing){
+await Review.deleteMany({_id :{$in : listing.reviews}});
+  }
+})
 
 const listing = mongoose.model("listing", listingSchema);
 

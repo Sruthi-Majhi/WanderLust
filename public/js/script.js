@@ -18,14 +18,11 @@
 
 
 //for show password functionality
-const passwordInput = document.getElementById('InputPassword');
-const showPasswordCheckbox = document.getElementById('showPasswordCheckbox');
+ document.addEventListener('DOMContentLoaded', function () {
+    const showPasswordCheckbox = document.getElementById('showPasswordCheckbox');
+    const passwordInput = document.getElementById('InputPassword');
 
-showPasswordCheckbox.addEventListener('change', function () {
-
-  if (showPasswordCheckbox.checked) {
-    passwordInput.type = 'text';
-  } else {
-    passwordInput.type = 'password';
-  }
-});
+    showPasswordCheckbox.addEventListener('change', function () {
+      passwordInput.type = this.checked ? 'text' : 'password';
+    });
+  });

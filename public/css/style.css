@@ -105,3 +105,26 @@ margin: 1.2rem;
     border: none;
 
 }
+
+#map {
+  width: 100%;
+  height: 400px;
+  border-radius: 16px;
+  border: 2px solid #eae5e5;
+  box-shadow: 0 6px 18px rgba(45, 44, 44, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#map:hover {
+  transform: scale(1.01);
+  box-shadow: 0 10px 30px rgba(45, 45, 45, 0.4);
+}
+
+.location-section h3 {
+  font-weight: 700;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 18px;
+  color: #a22323;
+  text-shadow: 1px 1px 2px rgba(205, 30, 30, 0.2);
+  margin-bottom: 2px;
+}
