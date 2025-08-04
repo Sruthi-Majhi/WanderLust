@@ -104,8 +104,9 @@ app.listen(port, () => {
 
 
 app.get("/", (req, res) => {
-  res.send("server working fine");
+  res.redirect("/listings");
 });
+
 
 app.all("*", (req, res, next) => {
   throw new ExpressError(404, "page not found!");
