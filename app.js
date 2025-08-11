@@ -24,7 +24,7 @@ const User = require("./models/user.js");
 
 let dbUrl = process.env.MONGO_ATLAS;
 
-let port = 3000;
+const port = process.env.PORT || 3000;
 
 const store = MongoStore.create({ 
 mongoUrl: dbUrl, 
