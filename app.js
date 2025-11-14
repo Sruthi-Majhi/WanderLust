@@ -87,7 +87,8 @@ app.use("/", usersRouter);
 async function main() {
   await mongoose.connect(dbUrl, {
     ssl: true,
-    tlsAllowInvalidCertificates: true,
+    retryWrites: true,
+    w: "majority",
   });
 }
 
